@@ -1,0 +1,21 @@
+# Usa un'immagine di base con Python
+FROM python:3.9
+
+RUN mkdir -p root/.aws
+
+COPY aws/credentials   root/.aws/
+COPY aws/config        root/.aws/
+
+# Imposta la directory di lavoro all'interno del container
+WORKDIR /app
+
+# Copia il file con la tua funzione Python nella directory di lavoro del container
+COPY matrix_det.py .
+COPY GUI/config.json   .
+
+# Installa eventuali dipendenze necessarie per la tua funzione (se presenti)
+RUN pip install flask
+RUN pip install boto3
+
+# Definisci il comando di avvio per eseguire la tua funzione
+CMD ["python", "matrix_det.py"]

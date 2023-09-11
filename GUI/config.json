@@ -1,0 +1,14 @@
+{
+
+  "port_server": "5500",
+  "port_hanoi": "80",
+  "port_sort": "8080",
+  "port_matrix": "8443",
+
+  "url_server": "http://localhost:XXXX/start_application",
+
+  "aws_access_key_id" : "",
+  "aws_secret_access_key" : "",
+  "aws_session_token": ""
+
+}
