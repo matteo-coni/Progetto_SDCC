@@ -88,7 +88,7 @@ def esegui_funzione():
 
 
 if __name__ == '__main__':
-    with open('GUI/config.json', 'r') as config_file:
+    with open('config.json', 'r') as config_file:
         config_data = json.load(config_file)
     port_matrix = config_data['port_matrix']
     app.run(host='0.0.0.0', port=int(port_matrix))

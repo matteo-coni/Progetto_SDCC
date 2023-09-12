@@ -12,6 +12,7 @@ results = {}
 port_hanoi = ""
 port_sort = ""
 port_matrix = ""
+dockerfile_path = ""
 
 def build_and_run_container_py(image_name, dockerfile_path, docker_absolute, ports_mapping):
     client = docker.from_env()
@@ -127,11 +128,10 @@ def start_application(name, input):
 
 def call_function_1(image_name):  # prova con funzione scritta in python
 
-    dockerfile_path = "/Users/matteo/SDCC_Project/SDCC_Faas"
+    #dockerfile_path = "/Users/matteo/SDCC_Project/SDCC_Faas"
     docker_absolute = ""
 
     if image_name == "docker-hanoi-py":
-        # docker_absolute = "/Users/matteo/SDCC_Project/SDCC_Faas/Dockerfile_Hanoi"
         docker_absolute = "Dockerfile_Hanoi"
         ports_mapping = {
             '80/tcp': int(port_hanoi)
@@ -178,5 +178,6 @@ if __name__ == '__main__':
     port_hanoi = config_data['port_hanoi']
     port_sort = config_data['port_sort']
     port_matrix = config_data['port_matrix']
+    dockerfile_path = config_data['path_dockerfile']
 
     app.run(host='0.0.0.0', port=port_server)

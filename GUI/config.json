@@ -7,6 +7,8 @@
 
   "url_server": "http://localhost:XXXX/start_application",
 
+  "path_dockerfile": "/Users/matteo/SDCC_Project/SDCC_Faas",
+
   "aws_access_key_id" : "",
   "aws_secret_access_key" : "",
   "aws_session_token": ""
