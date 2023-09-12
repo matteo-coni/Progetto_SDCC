@@ -15,4 +15,4 @@ Per installare l'applicazione è consigliabile eseguire il clone di questa repos
 E' possibile configurare, all'interno del file config.json (nella directory GUI), le porte locali da utilizzare.
 E' inoltre necessario modificare le credenziali AWS all'interno del file config.json e all'interno del file aws/credentials. Tuttavia, per fare ciò è necessario avere un laboratorio "Learner Lab" AWS attivo e recuperare i relativi token e chiavi di sicurezza, validi per 4 ore.
 
-Per avviare l'applicazione, è necessario far partire lo script 'Start.sh'
+Per avviare l'applicazione, è necessario prima far partire lo script 'Start_server.sh'
