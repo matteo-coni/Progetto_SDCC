@@ -1,11 +1,9 @@
-import base64
 import json
-import os
-
 import boto3
 from flask import jsonify, Flask, request
 
 app = Flask(__name__)
+
 
 def merge_sort(arr):
 
@@ -40,14 +38,9 @@ def merge_sort(arr):
             k += 1
 
     return arr
-# Esempio di utilizzo:
 
 def offload_to_lambda(array):
-    # Configura il client AWS Lambda
-
-    #aws_access_key_id="ASIAZXICDICSL5WV3W32"
-    #aws_secret_access_key="v3ucFmfZXr7+cv0ABElmamXfh4COGK8RansQGcwa"
-    #aws_session_token="FwoGZXIvYXdzEOD//////////wEaDMoTooHXU2AQ+W/BHCK8Aa+g/ECmIygO4cej5Tb6NKpAyUuSgonRryYqp/JBpvhrUFMrzBPyd5Zs2bDRljEq+26SQTLhUL6aRICY6qeZ6Gz7725tSfs2PsKm0RYxwXsKXlQ46qSjFz3lGPvw2seBfehsaXHeUeYi2cNBA1S78xiRAQvpU2Ekkdy6OWy41U1l3noW04fd8bYADWl2Lj1S/OFoEE5b0i8mesjsrM6We5Rg6EKKgORPut5dsUEUGAbIipHSwL8nb8v3EyOqKLrs7KcGMi2oe/k1kRwTBk8fNUf7QdtfUYkCAmuNAuCri+qNRr5PsHGMUa91yJHyew1dKHU="
+    # Configuro il client AWS Lambda
 
     with open('GUI/config.json', 'r') as config_file:
         config_data = json.load(config_file)
@@ -64,38 +57,32 @@ def offload_to_lambda(array):
 
     my_string = ",".join(map(str, array))
 
-    print(my_string)
-
     payload = {
         'input': my_string
     }
 
-    # Chiama la funzione Lambda
+    # Chiamo la funzione Lambda
     response = lambda_client.invoke(
         FunctionName='merge_sort_lambda',
-        InvocationType='RequestResponse',  # Cambia in base alle tue esigenze
+        InvocationType='RequestResponse',
         Payload=json.dumps(payload)
     )
 
-    # Ottieni il risultato dalla risposta
-    result = response['Payload'].read()
+    result = response['Payload'].read()      # risultato
     print("Risultato da Lambda:", result)
     risultato_dict = json.loads(result)
     body = risultato_dict["body"]
     print(body)
 
     my_string = ",".join(map(str, body))
-    #risultato_json = {
-    #    'risultato': body
-    #}
 
     print(my_string)
-    # Ritorna il risultato come JSON
-    #return jsonify(risultato_json)
-    return body
 
-def merge_sorted_lists(list1, list2):
+    return body  # qui ritorno una lista
 
+
+def merge_sorted_lists(list1, list2):  # date le due liste ordinate separatamente
+                                        # le unisco e le riordino insieme
     merged_list = []
     i = j = 0
 
@@ -117,20 +104,16 @@ def merge_sorted_lists(list1, list2):
 @app.route('/esegui-funzione', methods=['POST'])
 def esegui_funzione():
     print("funzione in esecuzione")
-    try:
-        # Ricevi i dati dalla richiesta HTTP come JSON
-        data = request.get_json()
 
-        # Estrai la stringa di input dalla richiesta
+    try:
+
+        data = request.get_json()  # Input Json
         input_string = data['input']
         my_list = list(map(int, input_string.split(",")))
 
         print(my_list)
-        # prova
-        #input_string = [64, 34, 25, 12, 22, 11, 90, 1, 34, 78, 123, 23, 88, 11, 1989]
 
-
-        # Esegui la tua funzione
+        # Decisione offloading nell'if
         if len(input_string) <= 10:
             risultato = merge_sort(my_list)
         else:
@@ -140,7 +123,6 @@ def esegui_funzione():
 
             risultato = merge_sorted_lists(risultato1, risultato2)
 
-        # Restituisci il risultato come JSON
         return jsonify({'risultato': risultato})
 
     except Exception as e:

@@ -26,13 +26,8 @@ def hanoi(n, da_asta, a_asta, asta_di_appoggio):
 
 
 def offload_to_lambda(input):
-    # Configura il client AWS Lambda
 
-
-    #aws_access_key_id="ASIAZXICDICSL5WV3W32"
-    #aws_secret_access_key="v3ucFmfZXr7+cv0ABElmamXfh4COGK8RansQGcwa"
-    #aws_session_token="FwoGZXIvYXdzEOD//////////wEaDMoTooHXU2AQ+W/BHCK8Aa+g/ECmIygO4cej5Tb6NKpAyUuSgonRryYqp/JBpvhrUFMrzBPyd5Zs2bDRljEq+26SQTLhUL6aRICY6qeZ6Gz7725tSfs2PsKm0RYxwXsKXlQ46qSjFz3lGPvw2seBfehsaXHeUeYi2cNBA1S78xiRAQvpU2Ekkdy6OWy41U1l3noW04fd8bYADWl2Lj1S/OFoEE5b0i8mesjsrM6We5Rg6EKKgORPut5dsUEUGAbIipHSwL8nb8v3EyOqKLrs7KcGMi2oe/k1kRwTBk8fNUf7QdtfUYkCAmuNAuCri+qNRr5PsHGMUa91yJHyew1dKHU="
-
+    # Apri il file per ottenere le credenziali aws lambda
     with open('config.json', 'r') as config_file:
         config_data = json.load(config_file)
     aws_access_key_id = config_data['aws_access_key_id']

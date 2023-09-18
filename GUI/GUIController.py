@@ -8,7 +8,6 @@ string = None
 
 
 def start_application(nome_cont, input):
-    # server_url = 'http://localhost:5500/start_application'
 
     #File config.json
     with open('config.json', 'r') as config_file:
@@ -208,11 +207,6 @@ hanoi_window.protocol("WM_DELETE_WINDOW", on_closing) # Protocol: gestione chius
 sort_window.protocol("WM_DELETE_WINDOW", on_closing) # Protocol: gestione chiusura finestra, chiamo on_closing
 matrix_window.protocol("WM_DELETE_WINDOW", on_closing) # Protocol: gestione chiusura finestra, chiamo on_closing
 
-
 # Avvia la GUI
 main_window.mainloop()
 
-
-
-#signal.signal(signal.SIGTERM, stop_and_remove_all_containers)
-#atexit.register(stop_and_remove_all_containers)  # quando chiudi l'applicazione, rimuovi tutti i container
