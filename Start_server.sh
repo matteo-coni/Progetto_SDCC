@@ -1,1 +1,1 @@
-python3 server.py
+python3 /Users/matteo/SDCC_Project/SDCC_Faas/server.py

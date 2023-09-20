@@ -4,6 +4,7 @@ from flask import jsonify, Flask, request
 
 app = Flask(__name__)
 
+number_offload = 10
 
 def merge_sort(arr):
 
@@ -114,12 +115,12 @@ def esegui_funzione():
         print(my_list)
 
         # Decisione offloading nell'if
-        if len(input_string) <= 10:
+        if len(input_string) <= number_offload:
             risultato = merge_sort(my_list)
         else:
 
-            risultato1 = merge_sort(my_list[0:9])
-            risultato2 = offload_to_lambda(my_list[9:])
+            risultato1 = merge_sort(my_list[0:number_offload-1])
+            risultato2 = offload_to_lambda(my_list[number_offload-1:])
 
             risultato = merge_sorted_lists(risultato1, risultato2)
 
@@ -133,4 +134,6 @@ if __name__ == '__main__':
     with open('config.json', 'r') as config_file:
         config_data = json.load(config_file)
     port_sort = config_data['port_sort']
+    number_offload = config_data['number_offload_sort']
+
     app.run(host='0.0.0.0', port=int(port_sort))

@@ -5,6 +5,8 @@
   "port_sort": "8080",
   "port_matrix": "8443",
 
+  "number_offload_sort": 10,
+
   "url_server": "http://localhost:XXXX/start_application",
 
   "path_dockerfile": "/Users/matteo/SDCC_Project/SDCC_Faas",
