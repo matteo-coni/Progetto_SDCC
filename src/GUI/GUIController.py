@@ -39,22 +39,22 @@ def start_application(nome_cont, input):
     else:
         if nome_cont == "cont-hanoi":
             result_text1.delete(1.0, tk.END)  # Cancella il testo precedente
-            result_text1.insert(1.0, "Errore nell'esecuzione: hai inserito un intero?")
+            result_text1.insert(1.0, "Errore nell'esecuzione: hai inserito un intero positivo?")
 
         elif nome_cont == "cont-sort":
             result_text3.delete(1.0, tk.END)  # Cancella il testo precedente
             result_text2.insert(1.0,
-                                "Errore nell'esecuzione: hai inserito una sequenza di numeri intervallata da virgole?")
+                                "Errore nell'esecuzione: hai inserito una sequenza di numeri intervallata da virgole? (es. 3,2,1)")
 
         elif nome_cont == "cont-matrix":
             result_text3.delete(1.0, tk.END)  # Cancella il testo precedente
-            result_text3.insert(1.0, "Errore nell'esecuzione: hai inserito la matrice correttamente?")
+            result_text3.insert(1.0, "Errore nell'esecuzione: hai inserito la matrice correttamente? (es. \n1,2,3\n4,5,6\n7,8,9\n ")
 
 
 def stop_and_remove_all_containers():
     client = docker.from_env()
 
-    # Ottieni la lista di tutti i container (anche quelli fermi)
+    # Ottieni la lista di tutti i container (anche quelli fermi o exited)
     containers = client.containers.list(all=True)
 
     # Rimuovi tutti i container
@@ -97,7 +97,7 @@ main_window.geometry("800x463")
 main_window.title("FAAS Management")
 main_window.resizable(False, False)
 
-background_image = tk.PhotoImage(file="sfondo_main.png")  # Sostituisci "sfondo.png" con il percorso dell'immagine
+background_image = tk.PhotoImage(file="sfondo_main.png")
 
 # Label per l'immagine di sfondo
 background_label = tk.Label(main_window, image=background_image)

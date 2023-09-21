@@ -18,6 +18,7 @@ port_matrix = ""
 dockerfile_path = ""
 
 
+
 def build_and_run_container_py(image_name, dockerfile_path, docker_absolute, ports_mapping):
 
     client = docker.from_env()
@@ -66,7 +67,7 @@ def start_application(name, input):
 
     client = docker.from_env()
 
-    # Cerca il container desiderato tra quelli attivi o in stato "exited"
+    # qui viene cercato il container desiderato tra quelli attivi o in stato exited
     container = None
     for c in client.containers.list(all=True, filters={"name": name}):
         if c.status in ("running", "restarting", "exited"):
@@ -74,11 +75,11 @@ def start_application(name, input):
             break
 
     if container:
-        # Se il container è attivo o in stato "exited", riavvialo
+        # se il container è attivo o in stato "exited", viene riavviato
         if container.status == "exited":
             container.restart()
     else:
-        # Se il container non esiste, crea un nuovo container e avvialo
+        # se il container non esiste, ne viene creato e avviato uno nuovo
         print("entrato nell'else, creo il container")
         if name == "cont-hanoi":
             call_function_1("docker-hanoi-py")
@@ -92,38 +93,31 @@ def start_application(name, input):
             call_function_1("docker-matrix")
             print("else name == cont-matrix")
 
-    # devo rifarlo per evitare il problema dell'if else precedente
+    # devo rifarlo per evitare il problema dell'if else precedente -- imposto la porta del container da contattare
     if name == "cont-hanoi":
         server_url = 'http://localhost:' + port_hanoi +'/esegui-funzione'
-        print(server_url)
         input_string = input
-        print("ok input string hanoi: " + input_string )
-
 
     elif name == "cont-sort":
         server_url = 'http://localhost:' + port_sort +'/esegui-funzione'
         input_string = input
-        print(server_url)
-        print("ok input string sort: " + input_string)
 
     elif name == "cont-matrix":
         server_url = 'http://localhost:' + port_matrix + '/esegui-funzione'
-        print(server_url)
         input_string = input
-        print("ok input string matrix: " + input_string)
 
-    time.sleep(5)
+    time.sleep(5)  # per evitare che il container non abbia ancora concluso la creazione
 
-    # Esegui una richiesta HTTP POST al server
+    # richiesta HTTP POST al server per ottenere il risultato
     response = requests.post(server_url, json={'input': input_string})
 
-    # Verifica la risposta
+    # controllo il codice di ritorno, se 200 ok
     if response.status_code == 200:
         risultato = response.json().get('risultato', 'Errore')
         print("Risultato:", risultato)
 
         container = client.containers.get(name)
-        container.stop()
+        container.stop() #stoppo il container per diminuire consumi
 
         return risultato
 
@@ -131,10 +125,11 @@ def start_application(name, input):
         print("Errore nella richiesta HTTP:", response.status_code)
 
 
-def call_function_1(image_name):  # prova con funzione scritta in python
+def call_function_1(image_name):
 
     docker_absolute = ""
 
+    # costruttio if-else per il ports mapping e per scegliere il dockerfile corretto
     if image_name == "docker-hanoi-py":
         docker_absolute = "Dockerfile_Hanoi"
         ports_mapping = {
@@ -165,20 +160,21 @@ def start():
 
     data = request.get_json()
     result = data.get('result')
-    input_prova = data['input']
+    input_ok = data['input']
     name = data['nome']
 
-    # ora fai start application
-    risultato = start_application(name, input_prova)
+    # start application per far partire il processo passando il nome della funzione e l'input
+    risultato = start_application(name, input_ok)
     results[0] = result
     return jsonify({'risultato': risultato})
+
 
 def get_last_access_time(container):
 
     container_info = container.attrs
-    # Prendo l'ultimo accesso
+    # prendo l'ultimo accesso
     last_access_str = container_info['State']['FinishedAt']
-    # Rimuovi i millisecondi dal formato dell'orario
+    # rimuovo i millisecondi dal formato dell'orario
     last_access_str = last_access_str.split('.')[0] + 'Z'
     last_access = datetime.strptime(last_access_str, '%Y-%m-%dT%H:%M:%S%z')
     last_access = last_access.replace(tzinfo=None)
@@ -192,11 +188,11 @@ def close_inactive_containers():
 
     while True:
 
-        now = datetime.now(pytz.utc) # pytz.utc per il fuso orario
+        now = datetime.now(pytz.utc)  # pytz.utc per il fuso orario
 
         print("Sono nel ciclo while")
 
-        # Limite inattività
+        # limite inattività con 2 minuti
         inactive_limit = (now - timedelta(minutes=2)).replace(tzinfo=None)
 
         running_containers = client.containers.list(filters={"status": "exited"})  # Lista container stati exited
@@ -209,21 +205,21 @@ def close_inactive_containers():
             if last_access < inactive_limit:
                 print(inactive_limit)
                 print(last_access)
-                # Chiudi solo i container inattivi
+                # chiudo solo i container inattivi da 2 minuti
                 container.remove(force=True)
 
-        # Sleep 120 secondi
+        # sleep 120 secondi per l'attesa
         time.sleep(120)
 
 
 def start_control_cont():
-    thread = threading.Thread(target=close_inactive_containers)
+    thread = threading.Thread(target=close_inactive_containers) #thread per il garbage collector
     thread.daemon = True
     thread.start()
 
 
 if __name__ == '__main__':
-    with open('GUI/config.json', 'r') as config_file:
+    with open('src/GUI/config.json', 'r') as config_file:
         config_data = json.load(config_file)
     port_server = config_data['port_server']
     port_hanoi = config_data['port_hanoi']

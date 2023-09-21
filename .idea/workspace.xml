@@ -4,11 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c85634b8-e542-4616-a89b-ab57140dff91" name="Changes" comment="minor fix, garbage collector and comment lines">
+    <list default="true" id="c85634b8-e542-4616-a89b-ab57140dff91" name="Changes" comment="minor fix + presentazione + relazione">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Start_server.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Start_server.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/merge_sort.py" beforeDir="false" afterPath="$PROJECT_DIR$/merge_sort.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile_Hanoi" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dockerfile_Hanoi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile_Matrix" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dockerfile_Matrix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile_Sort" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dockerfile_Sort" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/GUIController.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GUIController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/sfondo_main.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/sfondo_main.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aws/config" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility_container/aws/config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aws/credentials" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility_container/aws/credentials" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hanoi.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility_container/funzioni/hanoi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/matrix_det.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility_container/funzioni/matrix_det.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/merge_sort.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility_container/funzioni/merge_sort.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,16 +73,41 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/GUI" />
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Server" />
+      <recent name="$PROJECT_DIR$/Funzioni" />
+      <recent name="$PROJECT_DIR$/Dockerfile" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.GUIController">
+  <component name="RunManager" selected="Python.server">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="GUIController (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="SDCC_Faas" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/GUI" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/GUI/GUIController.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="GUIController" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="SDCC_Faas" />
@@ -111,7 +145,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/merge_sort.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Funzioni/merge_sort.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -133,7 +167,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/server.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/server.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -172,28 +206,13 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="Start_server.sh" type="ShConfigurationType" temporary="true">
-      <option name="SCRIPT_TEXT" value="" />
-      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/Start_server.sh" />
-      <option name="SCRIPT_OPTIONS" value="" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="/bin/bash" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="EXECUTE_IN_TERMINAL" value="true" />
-      <option name="EXECUTE_SCRIPT_FILE" value="true" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.merge_sort" />
         <item itemvalue="Python.server" />
+        <item itemvalue="Python.GUIController (1)" />
+        <item itemvalue="Python.merge_sort" />
         <item itemvalue="Shell Script.Shutdown_server.sh" />
         <item itemvalue="Shell Script.Start_Gui.sh" />
-        <item itemvalue="Shell Script.Start_server.sh" />
       </list>
     </recent_temporary>
   </component>
@@ -209,7 +228,7 @@
       <workItem from="1692356606917" duration="12592000" />
       <workItem from="1692625003723" duration="75535000" />
       <workItem from="1693228122926" duration="153004000" />
-      <workItem from="1694554876265" duration="15667000" />
+      <workItem from="1694554876265" duration="24216000" />
     </task>
     <task id="LOCAL-00001" summary="commit modifiche">
       <created>1694511668722</created>
@@ -225,7 +244,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695045025039</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="minor fix + presentazione + relazione">
+      <created>1695222188472</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1695222188473</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,7 +271,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commit modifiche" />
     <MESSAGE value="minor fix, garbage collector and comment lines" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor fix, garbage collector and comment lines" />
+    <MESSAGE value="minor fix + presentazione + relazione" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor fix + presentazione + relazione" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>
@@ -255,11 +282,12 @@
     <SUITE FILE_PATH="coverage/SDCC_Faas$cfb_encryption.coverage" NAME="merge_sort Coverage Results" MODIFIED="1694016005221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SDCC_Faas$merge_sort.coverage" NAME="merge_sort Coverage Results" MODIFIED="1695115962126" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SDCC_Faas$provaa.coverage" NAME="provaa Coverage Results" MODIFIED="1694270880296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SDCC_Faas$GUIController__1_.coverage" NAME="GUIController (1) Coverage Results" MODIFIED="1695293217811" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/GUI" />
     <SUITE FILE_PATH="coverage/SDCC_Faas$msq.coverage" NAME="hanoi Coverage Results" MODIFIED="1694185459627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SDCC_Faas$temperature.coverage" NAME="temperature Coverage Results" MODIFIED="1694078276537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/SDCC_Faas$server.coverage" NAME="server Coverage Results" MODIFIED="1695114910288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SDCC_Faas$server.coverage" NAME="server Coverage Results" MODIFIED="1695293286051" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SDCC_Faas$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1692615316970" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/GUI" />
-    <SUITE FILE_PATH="coverage/SDCC_Faas$GUIController.coverage" NAME="GUIController Coverage Results" MODIFIED="1695120640897" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/GUI" />
+    <SUITE FILE_PATH="coverage/SDCC_Faas$GUIController.coverage" NAME="GUIController Coverage Results" MODIFIED="1695224646678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/GUI" />
     <SUITE FILE_PATH="coverage/SDCC_Faas$cfb_decryption.coverage" NAME="matrix_det Coverage Results" MODIFIED="1694164986201" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

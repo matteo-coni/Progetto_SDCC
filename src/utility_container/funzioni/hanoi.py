@@ -45,14 +45,14 @@ def offload_to_lambda(input):
         'input': input
     }
 
-    # Chiama la funzione Lambda
+    # Chiamata lambda
     response = lambda_client.invoke(
         FunctionName='hanoi_lambda',
         InvocationType='RequestResponse',
         Payload=json.dumps(payload)
     )
 
-    # Ottieni il risultato dalla risposta
+    # Risultato
     result = response['Payload'].read()
     print("Risultato da Lambda:", result)
     risultato_dict = json.loads(result)
@@ -66,10 +66,8 @@ def offload_to_lambda(input):
 def esegui_funzione():
     print("funzione in esecuzione")
     try:
-        # Ricevi i dati dalla richiesta HTTP come JSON
+        # dati dalla richiesta HTTP come JSON ed estrazione stringa
         data = request.get_json()
-
-        # Estrai la stringa di input dalla richiesta
         input_string = data['input']
 
         input_int = int(input_string)

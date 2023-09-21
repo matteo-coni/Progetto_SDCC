@@ -3,14 +3,14 @@ FROM python:3.9
 
 RUN mkdir -p root/.aws
 
-COPY aws/credentials   root/.aws/
-COPY aws/config        root/.aws/
+COPY utility_container/aws/credentials   root/.aws/
+COPY utility_container/aws/config        root/.aws/
 
 # directory di lavoro all'interno del container
 WORKDIR /app
 
 # Copy dei file necessari
-COPY merge_sort.py .
+COPY utility_container/funzioni/merge_sort.py .
 COPY GUI/config.json   .
 
 # Install dipendenze

@@ -9,7 +9,7 @@
 
   "url_server": "http://localhost:XXXX/start_application",
 
-  "path_dockerfile": "/Users/matteo/SDCC_Project/SDCC_Faas",
+  "path_dockerfile": "/Users/matteo/SDCC_Project/SDCC_Faas/src",
 
   "aws_access_key_id" : "",
   "aws_secret_access_key" : "",

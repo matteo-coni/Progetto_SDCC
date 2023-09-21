@@ -6,7 +6,7 @@ from flask import jsonify, Flask, request
 app = Flask(__name__)
 
 # Qui imposto le credenziali come variabili globali
-with open('GUI/config.json', 'r') as config_file:
+with open('../../GUI/config.json', 'r') as config_file:
     config_data = json.load(config_file)
 aws_access_key_id = config_data['aws_access_key_id']
 aws_secret_access_key = config_data['aws_secret_access_key']
@@ -35,13 +35,13 @@ def esegui_funzione():
         # prendo i dati in json
         data = request.get_json()
 
-        # prendo l'input
+        # prendo l'input sotto forma di stringa
         input_string = data['input']
 
-        matrix = [list(map(int, line.split(','))) for line in input_string.split('\n')] # essendo l'input una stringa, lo trasformo in una lista
+        matrix = [list(map(int, line.split(','))) for line in input_string.split('\n')]  # essendo l'input una stringa, lo trasformo in una lista
 
         payload = {
-                'matrix': matrix # metto la lista matrix in un campo di un oggetto json
+                'matrix': matrix  # metto la lista matrix in un campo di un oggetto json
         }
 
         # chiamo la funzione lambda con l'api di aws
@@ -51,7 +51,7 @@ def esegui_funzione():
             Payload=json.dumps(payload)
         )
 
-        result = json.loads(response['Payload'].read()) # Qui prendo il risultato dal json
+        result = json.loads(response['Payload'].read())  # Qui prendo il risultato dal json
         cofactors = result['cofactors']
 
         # Calcola il determinante utilizzando i cofattori calcolati su aws lambda
@@ -61,7 +61,7 @@ def esegui_funzione():
 
         print("Determinante:", determinant)
 
-        # restituisco il risultato come JSON
+        # restituzione risultato come JSON
         return jsonify({'risultato': determinant})
 
     except Exception as e:

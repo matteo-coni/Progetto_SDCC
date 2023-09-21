@@ -3,14 +3,14 @@ FROM python:3.9
 
 RUN mkdir -p root/.aws
 
-COPY aws/credentials   root/.aws/
-COPY aws/config        root/.aws/
+COPY utility_container/aws/credentials   root/.aws/
+COPY utility_container/aws/config        root/.aws/
 
 # directory di lavoro all'interno del container
 WORKDIR /app
 
 # Copy dei file necessari
-COPY hanoi.py .
+COPY utility_container/funzioni/matrix_det.py .
 COPY GUI/config.json   .
 
 # Install dipendenze
@@ -18,4 +18,4 @@ RUN pip install flask
 RUN pip install boto3
 
 # Avvio
-CMD ["python", "hanoi.py"]
+CMD ["python", "matrix_det.py"]

@@ -41,9 +41,9 @@ def merge_sort(arr):
     return arr
 
 def offload_to_lambda(array):
-    # Configuro il client AWS Lambda
 
-    with open('GUI/config.json', 'r') as config_file:
+    # Configuro il client AWS Lambda
+    with open('../../GUI/config.json', 'r') as config_file:
         config_data = json.load(config_file)
     aws_access_key_id = config_data['aws_access_key_id']
     aws_secret_access_key = config_data['aws_secret_access_key']
