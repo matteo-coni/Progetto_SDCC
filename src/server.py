@@ -33,7 +33,7 @@ def build_and_run_container_py(image_name, dockerfile_path, docker_absolute, por
     try:
         # Costruisci l'immagine del container
         image, build_logs = client.images.build(path=dockerfile_path, dockerfile=docker_absolute, tag=image_name)
-        print("problema non è build_logs")
+
         # Run del container a partire da un immagine costruita sopra
         container = client.containers.run(
             image=image_name,
@@ -44,10 +44,8 @@ def build_and_run_container_py(image_name, dockerfile_path, docker_absolute, por
 
         result = container.logs().decode("utf-8")  # Log
 
-        global string
-
-        string = container.attrs['NetworkSettings']['IPAddress']
-        print("stringa è " + string)
+        # global string
+        # string = container.attrs['NetworkSettings']['IPAddress']
 
         # no wait altrimenti rimane bloccato
 
@@ -80,18 +78,14 @@ def start_application(name, input):
             container.restart()
     else:
         # se il container non esiste, ne viene creato e avviato uno nuovo
-        print("entrato nell'else, creo il container")
         if name == "cont-hanoi":
             call_function_1("docker-hanoi-py")
-            print("else name == cont-hanoi")
 
         elif name == "cont-sort":
             call_function_1("docker-sort")
-            print("else name == cont-sort")
 
         elif name == "cont-matrix":
             call_function_1("docker-matrix")
-            print("else name == cont-matrix")
 
     # devo rifarlo per evitare il problema dell'if else precedente -- imposto la porta del container da contattare
     if name == "cont-hanoi":
@@ -147,12 +141,6 @@ def call_function_1(image_name):
         }
 
     container = build_and_run_container_py(image_name, dockerfile_path, docker_absolute, ports_mapping)
-    print(container)
-
-    if container:
-        print("Container creato e in esecuzione:", container)
-    else:
-        print("Creazione del container fallita.")
 
 
 @app.route('/start_application', methods=['POST'])
@@ -190,21 +178,16 @@ def close_inactive_containers():
 
         now = datetime.now(pytz.utc)  # pytz.utc per il fuso orario
 
-        print("Sono nel ciclo while")
-
         # limite inattività con 2 minuti
         inactive_limit = (now - timedelta(minutes=2)).replace(tzinfo=None)
 
         running_containers = client.containers.list(filters={"status": "exited"})  # Lista container stati exited
-        print(running_containers)
 
         for container in running_containers:
             last_access = get_last_access_time(container)
 
             # Check sull'accesso
             if last_access < inactive_limit:
-                print(inactive_limit)
-                print(last_access)
                 # chiudo solo i container inattivi da 2 minuti
                 container.remove(force=True)
 
@@ -219,7 +202,7 @@ def start_control_cont():
 
 
 if __name__ == '__main__':
-    with open('src/GUI/config.json', 'r') as config_file:
+    with open('GUI/config.json', 'r') as config_file:
         config_data = json.load(config_file)
     port_server = config_data['port_server']
     port_hanoi = config_data['port_hanoi']

@@ -43,7 +43,7 @@ def merge_sort(arr):
 def offload_to_lambda(array):
 
     # Configuro il client AWS Lambda
-    with open('../../GUI/config.json', 'r') as config_file:
+    with open('config.json', 'r') as config_file:
         config_data = json.load(config_file)
     aws_access_key_id = config_data['aws_access_key_id']
     aws_secret_access_key = config_data['aws_secret_access_key']
@@ -54,7 +54,6 @@ def offload_to_lambda(array):
                                  aws_secret_access_key=aws_secret_access_key,
                                  aws_session_token=aws_session_token)
 
-    print("sto processando su aws lambda")
 
     my_string = ",".join(map(str, array))
 
@@ -76,8 +75,6 @@ def offload_to_lambda(array):
     print(body)
 
     my_string = ",".join(map(str, body))
-
-    print(my_string)
 
     return body  # qui ritorno una lista
 
@@ -104,15 +101,12 @@ def merge_sorted_lists(list1, list2):  # date le due liste ordinate separatament
 
 @app.route('/esegui-funzione', methods=['POST'])
 def esegui_funzione():
-    print("funzione in esecuzione")
 
     try:
 
         data = request.get_json()  # Input Json
         input_string = data['input']
         my_list = list(map(int, input_string.split(",")))
-
-        print(my_list)
 
         # Decisione offloading nell'if
         if len(input_string) <= number_offload:

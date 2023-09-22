@@ -6,7 +6,7 @@ from flask import jsonify, Flask, request
 app = Flask(__name__)
 
 # Qui imposto le credenziali come variabili globali
-with open('../../GUI/config.json', 'r') as config_file:
+with open('config.json', 'r') as config_file:
     config_data = json.load(config_file)
 aws_access_key_id = config_data['aws_access_key_id']
 aws_secret_access_key = config_data['aws_secret_access_key']
@@ -30,7 +30,7 @@ def divide_matrix(matrix):
 
 @app.route('/esegui-funzione', methods=['POST'])
 def esegui_funzione():
-    print("funzione in esecuzione")
+
     try:
         # prendo i dati in json
         data = request.get_json()
